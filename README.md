@@ -40,7 +40,7 @@ Sleep stage data lives in Google's cloud (via Health Connect sync to **Google He
 
 1. Open your Home Assistant dashboard, go to **HACS** > **Integrations**.
 2. Click the **three dots** (top-right) and select **Custom repositories**.
-3. Paste: `https://github.com/manate-anagram/ha-google-fit-sleep`
+3. Paste: `https://github.com/manate-anagram/ha-google-health-sleep`
 4. Select **Integration** as the Category and click **Add**.
 5. Click **Install** on the Google Health (Fit) card.
 6. **Restart Home Assistant** (Settings > System > Restart).
