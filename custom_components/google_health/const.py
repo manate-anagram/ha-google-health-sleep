@@ -1,4 +1,4 @@
-"""Constants for the Google Health (Google Fit) integration."""
+"""Constants for the Google Health (Fit Sleep) integration."""
 import logging
 
 DOMAIN = "google_health"
@@ -9,16 +9,12 @@ LOGGER = logging.getLogger(__package__)
 OAUTH2_AUTHORIZE = "https://accounts.google.com/o/oauth2/v2/auth"
 OAUTH2_TOKEN = "https://oauth2.googleapis.com/token"
 
-# Required OAuth scopes: both the legacy Fit API and the new Google Health (v4) API.
-# One re-auth grants both; the integration tries v4 first and falls back to Fit.
-# NOTE: Google Health v4 scopes end in ".readonly" (e.g. googlehealth.sleep.readonly).
+# Required OAuth scope: Google Health API v4 sleep read.
+# NOTE: v4 scopes end in ".readonly" and DISALLOW fitness.* scopes in the same
+# token (verified: mixed-scope tokens get 403 DISALLOWED_OAUTH_SCOPES).
 SCOPES = [
-    "https://www.googleapis.com/auth/fitness.sleep.read",
     "https://www.googleapis.com/auth/googlehealth.sleep.readonly",
 ]
-
-# Google Fit API v1 base URL (legacy, supported until end of 2026)
-FITNESS_API_BASE = "https://fitness.googleapis.com/fitness/v1/users/me"
 
 # Google Health API v4 base URL (new, account-centric)
 HEALTH_API_BASE = "https://health.googleapis.com/v4"
