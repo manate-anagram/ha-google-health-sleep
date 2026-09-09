@@ -1,0 +1,12 @@
+{
+  "domain": "google_health",
+  "name": "Google Health (Fit)",
+  "codeowners": ["@manate-anagram"],
+  "config_flow": true,
+  "dependencies": ["application_credentials"],
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "1.1.0",
+  "documentation": "https://github.com/manate-anagram/ha-google-fit-sleep",
+  "issue_tracker": "https://github.com/manate-anagram/ha-google-fit-sleep/issues"
+}
