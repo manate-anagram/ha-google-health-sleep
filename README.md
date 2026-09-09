@@ -58,7 +58,7 @@ Requires an OAuth client with **Google Fit API** enabled.
 4. **APIs & Services > OAuth consent screen**:
    * User Type: **External**
    * Add your Google account to the **test users** list (required while app is in Testing mode).
-   * Add scopes: `.../auth/fitness.sleep.read` and `.../auth/googlehealth.sleep.read`
+   * Add scopes: `.../auth/fitness.sleep.read` and `.../auth/googlehealth.sleep.readonly`
 
 ### 2. Create OAuth credentials
 1. **APIs & Services > Credentials > Create Credentials > OAuth client ID**.
@@ -72,7 +72,7 @@ Requires an OAuth client with **Google Fit API** enabled.
 
 1. **Settings > Devices & Services > Add Integration** → search **Google Health** (the domain is `google_health` for dashboard compatibility; data source is Google Health v4 / Google Fit).
 2. Enter your Client ID / Client Secret when prompted.
-3. Authorize with your Google account (consent screen; scopes: `fitness.sleep.read` + `googlehealth.sleep.read`).
+3. Authorize with your Google account (consent screen; scopes: `fitness.sleep.read` + `googlehealth.sleep.readonly`).
 4. Enter a display name (default: `My`).
 
 ---

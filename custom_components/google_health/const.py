@@ -11,9 +11,10 @@ OAUTH2_TOKEN = "https://oauth2.googleapis.com/token"
 
 # Required OAuth scopes: both the legacy Fit API and the new Google Health (v4) API.
 # One re-auth grants both; the integration tries v4 first and falls back to Fit.
+# NOTE: Google Health v4 scopes end in ".readonly" (e.g. googlehealth.sleep.readonly).
 SCOPES = [
     "https://www.googleapis.com/auth/fitness.sleep.read",
-    "https://www.googleapis.com/auth/googlehealth.sleep.read",
+    "https://www.googleapis.com/auth/googlehealth.sleep.readonly",
 ]
 
 # Google Fit API v1 base URL (legacy, supported until end of 2026)
