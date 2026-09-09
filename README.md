@@ -1,8 +1,10 @@
 # Google Fit Sleep Integration for Home Assistant
 
-A custom Home Assistant integration that reads **sleep segment data (light / deep / REM / awake)** from the **Google Fit API v1** (`fitness.googleapis.com`) and exposes it as sensors.
+A custom Home Assistant integration that reads **sleep data (light / deep / REM / awake)** from Google's health APIs and exposes it as sensors.
 
-> ⚠️ This is NOT the official HA integration, and it is NOT the "Google Health API" (v4) integration. It reads the legacy Google Fit API — the same data source used by the `google-fit-sleep` skill's `fetch_sleep.py`. If your sleep data appears in the Google Fit app, this integration can read it.
+> ⚠️ This is NOT the official HA integration. Data source is dual:
+> 1. **Google Health API v4** (`health.googleapis.com`) — new account-centric API, preferred when data is available (Health Connect → Google Health sync)
+> 2. **Google Fit API v1** (`fitness.googleapis.com`) — legacy API used as automatic fallback (supported until end of 2026)
 
 ---
 
@@ -11,9 +13,9 @@ A custom Home Assistant integration that reads **sleep segment data (light / dee
 The stock HA Google Health integration only exposes *total* sleep duration. Sleep **stages** (deep / REM / light breakdown) are not available through:
 
 * HA Companion App → Health Connect sensors (totals only, no stages)
-* The official Google Health (v4) integration (no stages)
+* The official Google Health (v4) integration's stock sensors (no stages)
 
-But the **Google Fit API** does return per-segment sleep stages. This integration fetches those segments and aggregates the most recent completed night.
+Sleep stage data lives in Google's cloud (via Health Connect sync to **Google Health** and/or **Google Fit**). This integration reads whichever source has data — v4 first, Fit as fallback — and aggregates the most recent completed night.
 
 ---
 
@@ -52,11 +54,11 @@ Requires an OAuth client with **Google Fit API** enabled.
 ### 1. Enable the API
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Create a project (or reuse one).
-3. **APIs & Services > Library** → enable **Google Fit API**.
+3. **APIs & Services > Library** → enable **Google Fit API** (and **Google Health API** if available).
 4. **APIs & Services > OAuth consent screen**:
    * User Type: **External**
    * Add your Google account to the **test users** list (required while app is in Testing mode).
-   * Add scope: `.../auth/fitness.sleep.read`
+   * Add scopes: `.../auth/fitness.sleep.read` and `.../auth/googlehealth.sleep.read`
 
 ### 2. Create OAuth credentials
 1. **APIs & Services > Credentials > Create Credentials > OAuth client ID**.
@@ -68,9 +70,9 @@ Requires an OAuth client with **Google Fit API** enabled.
 
 ## Configuration in Home Assistant
 
-1. **Settings > Devices & Services > Add Integration** → search **Google Health** (the domain is `google_health` for dashboard compatibility; the data source is Google Fit).
+1. **Settings > Devices & Services > Add Integration** → search **Google Health** (the domain is `google_health` for dashboard compatibility; data source is Google Health v4 / Google Fit).
 2. Enter your Client ID / Client Secret when prompted.
-3. Authorize with your Google account (consent screen; scope is `fitness.sleep.read`).
+3. Authorize with your Google account (consent screen; scopes: `fitness.sleep.read` + `googlehealth.sleep.read`).
 4. Enter a display name (default: `My`).
 
 ---
